@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.R;
 
@@ -18,11 +19,13 @@ public class ItemPackListAdapter extends RecyclerView.Adapter<ItemPackListAdapte
     private List<ItemOrder> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private List<Item> mData2;
 
     // data is passed into the constructor
-    public ItemPackListAdapter(Context context, List<ItemOrder> data) {
+    public ItemPackListAdapter(Context context, List<ItemOrder> data, List<Item> mDate2) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mData2 = mDate2;
     }
 
     // inflates the row layout from xml when needed
@@ -36,10 +39,11 @@ public class ItemPackListAdapter extends RecyclerView.Adapter<ItemPackListAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        Item item = mData2.get(position);
         ItemOrder itemOrder = mData.get(position);
         holder.name.setText(itemOrder.getItemName());
         holder.price.setText(String.format("%d", itemOrder.getQuantity()));
+        holder.unit.setText(item.getItemUnit());
     }
 
     // total number of rows
@@ -50,13 +54,14 @@ public class ItemPackListAdapter extends RecyclerView.Adapter<ItemPackListAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView id, name, price;
+        TextView id, name, price, unit;
 
         ViewHolder(View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.item_id);
             name = itemView.findViewById(R.id.item_name);
             price = itemView.findViewById(R.id.item_price);
+            unit = itemView.findViewById(R.id.unit);
             itemView.setOnClickListener(this);
         }
 

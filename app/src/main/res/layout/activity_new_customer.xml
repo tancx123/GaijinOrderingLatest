@@ -35,7 +35,7 @@
             <TextView
                 android:id="@+id/group_customer_info"
                 android:layout_width="0dp"
-                android:layout_height="720dp"
+                android:layout_height="650dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:background="@android:color/white"
@@ -69,125 +69,135 @@
                 app:layout_constraintStart_toStartOf="@+id/title_customer_info"
                 app:layout_constraintTop_toBottomOf="@+id/title_customer_info" />
 
-            <RadioButton
-                android:id="@+id/radioBtn_Business"
+            <RadioGroup
+                android:id="@+id/group_custType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Business"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/text_customer_name_input_sales"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_customer_name_input_sales"
-                app:layout_constraintTop_toBottomOf="@+id/text_customer_name_input_sales" />
+                app:layout_constraintTop_toBottomOf="@+id/text_customer_name_input_sales"
+                >
 
-            <RadioButton
-                android:id="@+id/radioBtn_Individual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Individual"
-                app:layout_constraintEnd_toEndOf="@+id/text_customer_name_input_sales"
-                app:layout_constraintHorizontal_bias="0.75"
-                app:layout_constraintStart_toStartOf="@+id/text_customer_name_input_sales"
-                app:layout_constraintTop_toBottomOf="@+id/text_customer_name_input_sales" />
+                <RadioButton
+                    android:id="@+id/radioBtn_Business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Business"
+                    android:checked="true"
+                    app:layout_constraintEnd_toEndOf="@+id/text_customer_name_input_sales"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/text_customer_name_input_sales"
+                    app:layout_constraintTop_toBottomOf="@+id/text_customer_name_input_sales" />
 
-            <TextView
-                android:id="@+id/text_salutation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Salutation"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/radioBtn_Business"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/radioBtn_Business"
-                app:layout_constraintTop_toBottomOf="@+id/radioBtn_Business" />
+                <RadioButton
+                    android:id="@+id/radioBtn_Individual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Individual"
+                    app:layout_constraintEnd_toEndOf="@+id/text_customer_name_input_sales"
+                    app:layout_constraintHorizontal_bias="0.75"
+                    app:layout_constraintStart_toStartOf="@+id/text_customer_name_input_sales"
+                    app:layout_constraintTop_toBottomOf="@+id/text_customer_name_input_sales" />
+
+            </RadioGroup>
+
 
             <TextView
                 android:id="@+id/text_firstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:layout_marginLeft="10dp"
-                android:text="First Name"
+                android:text="Name"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/radioBtn_Individual"
-                app:layout_constraintStart_toEndOf="@+id/text_salutation"
-                app:layout_constraintTop_toBottomOf="@+id/radioBtn_Business" />
+                app:layout_constraintStart_toStartOf="@+id/group_custType"
+                app:layout_constraintTop_toBottomOf="@+id/group_custType" />
 
             <EditText
-                android:id="@+id/text_salutation_input"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="Mr"
-                app:layout_constraintEnd_toEndOf="@+id/text_salutation"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_salutation"
-                app:layout_constraintTop_toBottomOf="@+id/text_salutation" />
-
-            <EditText
-                android:id="@+id/text_firstName_input"
+                android:id="@+id/text_custName_input"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/text_firstName"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/text_salutation_input"
+                android:hint="John"
+                app:layout_constraintStart_toStartOf="@+id/text_firstName"
                 app:layout_constraintTop_toBottomOf="@+id/text_firstName" />
 
             <TextView
-                android:id="@+id/text_lastName"
+                android:id="@+id/text_custIc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Last Name"
+                android:layout_marginTop="10dp"
+                android:text="IC Number"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/text_salutation_input"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_salutation_input"
-                app:layout_constraintTop_toBottomOf="@+id/text_salutation_input" />
+                app:layout_constraintStart_toStartOf="@+id/text_custName_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_custName_input" />
 
             <EditText
-                android:id="@+id/text_lastName_input"
+                android:id="@+id/text_custIc_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/text_lastName"
+                android:hint="700223XXXXXX"
+                app:layout_constraintEnd_toEndOf="@+id/text_custIc"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_lastName"
-                app:layout_constraintTop_toBottomOf="@+id/text_lastName" />
+                app:layout_constraintStart_toStartOf="@+id/text_custIc"
+                app:layout_constraintTop_toBottomOf="@+id/text_custIc" />
 
             <TextView
-                android:id="@+id/text_company_name"
+                android:id="@+id/text_customer_gender"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:text="Gender"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_custIc_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_custIc_input" />
+
+            <RadioGroup
+                android:id="@+id/group_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Company Name"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/text_lastName_input"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/text_customer_gender"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_lastName_input"
-                app:layout_constraintTop_toBottomOf="@+id/text_lastName_input" />
+                app:layout_constraintStart_toStartOf="@+id/text_customer_gender"
+                app:layout_constraintTop_toBottomOf="@+id/text_customer_gender"
+                >
 
-            <EditText
-                android:id="@+id/text_company_name_input"
-                android:layout_width="350dp"
+            <RadioButton
+                android:id="@+id/radioBtn_Male"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/text_company_name"
+                android:text="Male"
+                android:checked="true"
+                app:layout_constraintEnd_toEndOf="@+id/group_gender"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_company_name"
-                app:layout_constraintTop_toBottomOf="@+id/text_company_name" />
+                app:layout_constraintStart_toStartOf="@+id/group_gender"
+                app:layout_constraintTop_toBottomOf="@+id/group_gender" />
+
+            <RadioButton
+                android:id="@+id/radioBtn_Female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Female"
+                app:layout_constraintEnd_toEndOf="@+id/group_gender"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintStart_toStartOf="@+id/group_gender"
+                app:layout_constraintTop_toBottomOf="@+id/group_gender" />
+
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/text_email"
@@ -197,10 +207,10 @@
                 android:text="Email"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/text_company_name_input"
+                app:layout_constraintEnd_toEndOf="@+id/group_gender"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_company_name_input"
-                app:layout_constraintTop_toBottomOf="@+id/text_company_name_input" />
+                app:layout_constraintStart_toStartOf="@+id/group_gender"
+                app:layout_constraintTop_toBottomOf="@+id/group_gender" />
 
             <EditText
                 android:id="@+id/text_email_input"
@@ -215,11 +225,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_email" />
 
             <TextView
-                android:id="@+id/text_phone"
+                android:id="@+id/text_custMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Phone"
+                android:text="Mobile"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/text_email_input"
@@ -228,44 +238,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_email_input" />
 
             <EditText
-                android:id="@+id/text_phone_input"
+                android:id="@+id/text_custMobile_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/text_phone"
+                android:hint="0121234567"
+                app:layout_constraintEnd_toEndOf="@+id/text_custMobile"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_phone"
-                app:layout_constraintTop_toBottomOf="@+id/text_phone" />
-
-            <TextView
-                android:id="@+id/text_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="Address"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/text_phone_input"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_phone_input"
-                app:layout_constraintTop_toBottomOf="@+id/text_phone_input" />
-
-            <EditText
-                android:id="@+id/text_address_input"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/text_address"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_address"
-                app:layout_constraintTop_toBottomOf="@+id/text_address" />
+                app:layout_constraintStart_toStartOf="@+id/text_custMobile"
+                app:layout_constraintTop_toBottomOf="@+id/text_custMobile" />
 
             <TextView
                 android:id="@+id/group_other_info"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
@@ -289,11 +276,11 @@
                 app:layout_constraintTop_toTopOf="@+id/group_other_info" />
 
             <TextView
-                android:id="@+id/text_currency"
+                android:id="@+id/text_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Currency *"
+                android:text="Company Name"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/title_other_detail"
@@ -302,78 +289,66 @@
                 app:layout_constraintTop_toBottomOf="@+id/title_other_detail" />
 
             <EditText
-                android:id="@+id/text_currency_input"
+                android:id="@+id/text_company_name_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="MYR - Malaysia Ranggit(Drop Down)"
-                app:layout_constraintEnd_toEndOf="@+id/text_currency"
+                android:hint="Abu Sdn Bhd"
+                app:layout_constraintEnd_toEndOf="@+id/text_company_name"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_currency"
-                app:layout_constraintTop_toBottomOf="@+id/text_currency" />
+                app:layout_constraintStart_toStartOf="@+id/text_company_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_company_name" />
 
             <TextView
-                android:id="@+id/text_payment_terms"
+                android:id="@+id/text_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Payment Terms *"
+                android:text="Address"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/text_currency_input"
+                app:layout_constraintEnd_toEndOf="@+id/text_company_name_input"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_currency_input"
-                app:layout_constraintTop_toBottomOf="@+id/text_currency_input" />
+                app:layout_constraintStart_toStartOf="@+id/text_company_name_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_company_name_input" />
 
             <EditText
-                android:id="@+id/text_payment_terms_input"
+                android:id="@+id/text_address_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="Due on Receipt(Drop Down)"
-                app:layout_constraintEnd_toEndOf="@+id/text_payment_terms"
+                android:hint="122, Lorong Nanas..."
+                app:layout_constraintEnd_toEndOf="@+id/text_address"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_payment_terms"
-                app:layout_constraintTop_toBottomOf="@+id/text_payment_terms" />
+                app:layout_constraintStart_toStartOf="@+id/text_address"
+                app:layout_constraintTop_toBottomOf="@+id/text_address" />
 
             <TextView
-                android:id="@+id/group_remark"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.454"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/group_other_info"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
-                android:id="@+id/text_remark"
+                android:id="@+id/text_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="16dp"
-                android:text="Remarks(For Internal Use)"
+                android:layout_marginTop="25dp"
+                android:text="Phone"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/group_remark"
-                app:layout_constraintTop_toTopOf="@+id/group_remark" />
+                app:layout_constraintEnd_toEndOf="@+id/text_address_input"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_address_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_address_input" />
 
             <EditText
-                android:id="@+id/text_remark_input"
+                android:id="@+id/text_phone_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                app:layout_constraintEnd_toEndOf="@+id/text_remark"
+                android:hint="041234567"
+                app:layout_constraintEnd_toEndOf="@+id/text_phone"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text_remark"
-                app:layout_constraintTop_toBottomOf="@+id/text_remark" />
-
+                app:layout_constraintStart_toStartOf="@+id/text_phone"
+                app:layout_constraintTop_toBottomOf="@+id/text_phone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

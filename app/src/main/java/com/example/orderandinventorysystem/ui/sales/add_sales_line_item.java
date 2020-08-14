@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,14 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
-import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.R;
-
-import com.example.orderandinventorysystem.ui.customer.CustomerListAdapter;
-import com.example.orderandinventorysystem.ui.customer.CustomerMain;
-import com.example.orderandinventorysystem.ui.customer.new_customer;
 import com.example.orderandinventorysystem.ui.item.ItemListAdapter;
 
 import java.sql.Connection;
@@ -203,7 +197,7 @@ public class add_sales_line_item extends AppCompatActivity implements ItemListAd
                     ResultSet rs = stmt.executeQuery(query);
 
                     while (rs.next()) {
-                        itemList.add(new Item(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),rs.getInt(6), rs.getDouble(7), rs.getDouble(8)));
+                        itemList.add(new Item(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),rs.getInt(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9)));
                         Log.d("Success", rs.getString(1));
                     }
 

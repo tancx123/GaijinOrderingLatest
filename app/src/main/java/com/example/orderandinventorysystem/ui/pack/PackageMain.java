@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
+import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.Model.Pack;
 import com.example.orderandinventorysystem.Model.Sales;
@@ -37,6 +38,7 @@ public class PackageMain extends AppCompatActivity {
     String latestShipID;
     int totalQuantity;
     Pack pack;
+    ArrayList <Item> itemList;
     ArrayList <ItemOrder> ioList;
     Shipment shipment;
     String intentPackageID;
@@ -59,9 +61,10 @@ public class PackageMain extends AppCompatActivity {
         packageInfo.execute("");
 
         ioList = new ArrayList<>();
+        itemList = new ArrayList<>();
         recyclerView = findViewById(R.id.itemLine_2);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ItemPackListAdapter(this, ioList);
+        adapter = new ItemPackListAdapter(this, ioList, itemList);
 
     }
 
@@ -191,6 +194,17 @@ public class PackageMain extends AppCompatActivity {
                                 rs.getString(3), rs.getDouble(4),
                                 rs.getDouble(5), rs.getInt(6), rs.getDouble(7)));
                         totalQuantity += rs.getInt(6);
+
+                        query = " SELECT * FROM ITEM WHERE itemID ='" + rs.getString(2) + "'";
+                        stmt = con.createStatement();
+                        ResultSet rs2 = stmt.executeQuery(query);
+
+                        if (rs2.next()) {
+                            itemList.add(new Item(rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4)
+                                    , rs2.getInt(5), rs2.getInt(6), rs2.getDouble(7), rs2.getDouble(8), rs2.getString(9)));
+
+                        }
+
                     }
 
                     query = " SELECT * FROM SHIPMENT WHERE packID ='" + intentPackageID + "'";

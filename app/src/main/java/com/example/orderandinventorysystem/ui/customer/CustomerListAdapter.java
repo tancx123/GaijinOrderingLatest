@@ -1,12 +1,9 @@
 package com.example.orderandinventorysystem.ui.customer;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +12,6 @@ import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapter.ViewHolder> {
@@ -39,20 +35,15 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
         return new ViewHolder(view);
     }
 
-    public void filterList(ArrayList<Customer> filteredList) {
-        mData = filteredList;
-        notifyDataSetChanged();
-    }
-
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Customer cust = mData.get(position);
+        holder.id.setText(cust.getCustID());
         holder.myTextView.setText(cust.getCustName());
         holder.comp.setText(cust.getCompanyName());
         holder.phone.setText(cust.getPhone());
         holder.mobile.setText(cust.getMobile());
-        holder.id.setText(cust.getCustID());
     }
 
     // total number of rows
@@ -61,9 +52,14 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
         return mData.size();
     }
 
+    public void filterList(ArrayList<Customer> filteredList) {
+        mData = filteredList;
+        notifyDataSetChanged();
+    }
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView, comp, phone, mobile, id;
+        TextView id, myTextView, comp, phone, mobile;
 
         ViewHolder(View itemView) {
             super(itemView);

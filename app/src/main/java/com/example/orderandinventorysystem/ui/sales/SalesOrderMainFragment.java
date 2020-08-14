@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -188,16 +189,20 @@ public class SalesOrderMainFragment extends AppCompatActivity {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         paint.setTextSize(70);
-        canvas.drawText("Sales Order", pageWidth/2, 270, paint);
+        canvas.drawText("Sales 2Order", pageWidth/2, 270, paint);
 
         salesPdf.finishPage(page1);
 
-        File file = new File (Environment.getExternalStorageDirectory(), "SalesOrder.pdf");
+        File file = new File (getFilesDir(),"SalesOrder.pdf");
+
 
         try {
             salesPdf.writeTo(new FileOutputStream(file));
+            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Something wrong: " + e.toString(),
+                    Toast.LENGTH_LONG).show();
         }
 
         salesPdf.close();

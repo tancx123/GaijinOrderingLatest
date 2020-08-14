@@ -2,26 +2,20 @@ package com.example.orderandinventorysystem.ui.sales;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,14 +26,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
 import com.example.orderandinventorysystem.Model.Customer;
-import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.Model.Sales;
 import com.example.orderandinventorysystem.R;
-import com.example.orderandinventorysystem.ui.customer.CustomerFragment;
 import com.example.orderandinventorysystem.ui.customer.CustomerListAdapter;
-import com.example.orderandinventorysystem.ui.customer.CustomerMain;
-import com.example.orderandinventorysystem.ui.purchase.add_line_item;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

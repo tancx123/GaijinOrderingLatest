@@ -14,13 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
-import com.example.orderandinventorysystem.Model.Invoice;
 import com.example.orderandinventorysystem.Model.ItemOrder;
-import com.example.orderandinventorysystem.Model.Pack;
 import com.example.orderandinventorysystem.Model.Sales;
-import com.example.orderandinventorysystem.Model.Shipment;
 import com.example.orderandinventorysystem.R;
-import com.example.orderandinventorysystem.ui.item.ItemListAdapter;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

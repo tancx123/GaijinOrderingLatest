@@ -23,15 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.customer.new_customer"/>
+        <activity android:name=".ui.customer.CustomerMain"/>
+        <activity android:name=".ui.customer.edit_customer"/>
+        <activity android:name=".ui.item.ItemMain"/>
+        <activity android:name=".ui.item.edit_item"/>
+        <activity android:name=".ui.item.add_item"/>
         <activity android:name=".ui.pack.add_package"/>
         <activity android:name=".ui.pack.add_shipment"/>
         <activity android:name=".ui.sales.SalesOrderMainFragment"/>
         <activity android:name=".ui.invoice.InvoiceMainFragment"/>
         <activity android:name=".ui.payment.PaymentMain"/>
         <activity android:name=".ui.pack.PackageMain"/>
-        <activity android:name=".ui.customer.CustomerMain"/>
-        <activity android:name=".ui.item.ItemMain"/>
         <activity android:name=".ui.invoice.add_new_invoice"/>
         <activity android:name=".ui.purchase.PurchaseMain"/>
         <activity android:name=".ui.vendor.VendorMain"/>
@@ -50,6 +52,7 @@
         <activity android:name=".ui.sales.edit_sales_orders"/>
         <activity android:name=".ui.invoice.edit_new_invoice"/>
         <activity android:name=".ui.bill.BillMain"/>
+        <activity android:name=".ui.customer.new_customer"/>
     </application>
 
 </manifest>

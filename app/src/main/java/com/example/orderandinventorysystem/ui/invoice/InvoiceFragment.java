@@ -11,20 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
 import com.example.orderandinventorysystem.Model.Invoice;
-import com.example.orderandinventorysystem.Model.Item;
-import com.example.orderandinventorysystem.Model.Sales;
 import com.example.orderandinventorysystem.R;
-import com.example.orderandinventorysystem.ui.item.ItemListAdapter;
-import com.example.orderandinventorysystem.ui.item.ItemMain;
-import com.example.orderandinventorysystem.ui.sales.SalesListAdapter;
-import com.example.orderandinventorysystem.ui.sales.SalesOrderMainFragment;
-import com.example.orderandinventorysystem.ui.sales.sales_avail;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

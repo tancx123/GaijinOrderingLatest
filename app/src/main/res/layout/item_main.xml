@@ -221,42 +221,6 @@
 
                 </TableRow>
 
-                <TableRow
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp">
-
-                    <!-- first element of the row-->
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Available for Sale"
-                        android:textColor="#000"
-                        android:textSize="14sp" />
-
-                    <TextView
-
-                        android:id="@+id/account_available"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0.00"
-                        android:textColor="#000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-
-                        android:id="@+id/phy_available"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0.00"
-                        android:textColor="#000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </TableRow>
             </TableLayout>
 
         </LinearLayout>

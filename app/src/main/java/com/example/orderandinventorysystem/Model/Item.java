@@ -1,20 +1,47 @@
 package com.example.orderandinventorysystem.Model;
 
-public class Item {
+import java.io.Serializable;
 
-    private String itemName, itemID, itemUnit, itemDesc;
+public class Item implements Serializable {
+
+    private String itemName, itemID, itemUnit, itemDesc, itemStatus;
     private double sellPrice, costPrice;
     private int quantity = 0, quantityPHY = 0;
 
-    public Item(String itemID, String itemName, String itemUnit, String itemDesc, int quantity, int quantityPHY, double sellPrice, double costPrice) {
-        this.itemName = itemName;
+    public Item(String itemID, String itemName,String itemUnit, String itemDesc, double sellPrice, double costPrice, String itemStatus) {
+
         this.itemID = itemID;
+        this.itemName = itemName;
         this.itemUnit = itemUnit;
         this.itemDesc = itemDesc;
         this.sellPrice = sellPrice;
         this.costPrice = costPrice;
+        this.itemStatus = itemStatus;
+    }
+
+    public Item(String itemID, String itemName,String itemUnit, String itemDesc, int quantity, int quantityPHY,double sellPrice, double costPrice, String itemStatus) {
+
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemUnit = itemUnit;
+        this.itemDesc = itemDesc;
         this.quantity = quantity;
         this.quantityPHY = quantityPHY;
+        this.sellPrice = sellPrice;
+        this.costPrice = costPrice;
+        this.itemStatus = itemStatus;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
+    }
+
+    public String getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(String itemStatus) {
+        this.itemStatus = itemStatus;
     }
 
     public int getQuantityPHY() {
@@ -45,7 +72,7 @@ public class Item {
         return itemID;
     }
 
-    public void setItemID(String itemID) {
+    public void setItemSKU(String itemID) {
         this.itemID = itemID;
     }
 
@@ -80,4 +107,5 @@ public class Item {
     public void setCostPrice(double costPrice) {
         this.costPrice = costPrice;
     }
+
 }

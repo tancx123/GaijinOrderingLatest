@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.R;
 
@@ -34,11 +33,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         return new ViewHolder(view);
     }
 
-    public void filterList(ArrayList<Item> filteredList) {
-        mData = filteredList;
-        notifyDataSetChanged();
-    }
-
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -47,6 +41,12 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
         holder.name.setText(item.getItemName());
         holder.desc.setText(item.getItemDesc());
         holder.price.setText(String.format("%.2f", item.getSellPrice()));
+        holder.price2.setText(String.format("%.2f", item.getCostPrice()));
+    }
+
+    public void filterList(ArrayList<Item> filteredList) {
+        mData = filteredList;
+        notifyDataSetChanged();
     }
 
     // total number of rows
@@ -54,17 +54,18 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
     public int getItemCount() {
         return mData.size();
     }
-
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView id, name, desc, price;
+        TextView id, name, desc, quantity, unit, price, price2;
 
         ViewHolder(View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.item_id);
             name = itemView.findViewById(R.id.item_name);
             desc = itemView.findViewById(R.id.item_desc);
+//            unit = itemView.findViewById(R.id.item_unit);
             price = itemView.findViewById(R.id.price);
+            price2 = itemView.findViewById(R.id.price2);
             itemView.setOnClickListener(this);
         }
 
