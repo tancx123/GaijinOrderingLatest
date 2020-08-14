@@ -1,6 +1,13 @@
 package com.example.orderandinventorysystem.ui.pack;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +35,9 @@ import com.example.orderandinventorysystem.ui.sales.ItemOrderListAdapter;
 import com.example.orderandinventorysystem.ui.sales.SalesOrderMainFragment;
 import com.example.orderandinventorysystem.ui.sales.edit_sales_orders;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -89,9 +100,235 @@ public class PackageMain extends AppCompatActivity {
         }
     }
 
+    public void pdfGenerate() {
+
+        Bitmap bmp, scaledbmp;
+        int pageWidth = 1200, pageHeight = 1960;
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.gaijin);
+        scaledbmp = Bitmap.createScaledBitmap(bmp, 250, 125, false);
+
+        PdfDocument salesPdf = new PdfDocument();
+        Paint paint = new Paint();
+
+        PdfDocument.PageInfo pageInfo1 = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create();
+        PdfDocument.Page page1 = salesPdf.startPage(pageInfo1);
+        Canvas canvas = page1.getCanvas();
+
+        //draw Gaijin Logo Title
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.ITALIC));
+        paint.setTextSize(45);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(3);
+        canvas.drawText("Gaijin Company", 925, 325, paint);
+        paint.setStyle(Paint.Style.FILL);
+
+        //draw Gaijin Logo
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.inventory);
+        scaledbmp = Bitmap.createScaledBitmap(bmp, 200,125,false);
+        canvas.drawBitmap(scaledbmp,810,150, paint);
+
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(60);
+        canvas.drawText("Delivery Order", 925, 505, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(25);
+        canvas.drawText("From : ", 100,185, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        paint.setTextSize(20);
+        canvas.drawText("Gaijin Company", 100,225, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("No.4 Taman Nanas,", 100,265, paint);        // Remember change Y - axis
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("14535 Kedah, Malaysia", 100,305, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Email : gaijin_888@gmail.com", 100,345, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Contact : 012-4428888", 100,385, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(25);
+        canvas.drawText("To : ", 100,465, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        paint.setTextSize(20);
+        canvas.drawText("Abu Muhammad", 100,505, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("25, Jalan Pisang", 100,545, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("55302, Melaka Malaysia", 100,585, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Email : abu_0821@gmail.com", 100,625, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Contact: 0123938472", 100,665, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Contact: 0123938472", 100,665, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Order ID : ", 800,585, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Order Date : ", 800,625, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("Sales Person : ", 800,665, paint);
+
+        paint.setTextAlign(Paint.Align.RIGHT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText(pack.getPackID(), 1050,585, paint);
+
+        paint.setTextAlign(Paint.Align.RIGHT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText(pack.getPackDate(), 1050,625, paint);
+
+        paint.setTextAlign(Paint.Align.RIGHT);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(20);
+        canvas.drawText("SpongeBob", 1050,665, paint);
+
+        //Columns Name
+        paint.setTextSize(20f);
+
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+        canvas.drawLine(20, 790, pageWidth-20, 790, paint);
+        canvas.drawLine(20, 860, pageWidth-20, 860, paint);
+        canvas.drawLine(20, 790, 20, 860, paint);
+        canvas.drawLine(pageWidth-20, 790, pageWidth-20, 860, paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawText("No", 40, 830, paint);
+        canvas.drawText("Item Name", 100, 830, paint);
+        paint.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawText("Quantity", pageWidth-30, 830, paint);
+
+        canvas.drawLine(80, 790, 80, 860, paint);
+        canvas.drawLine(1010, 790, 1010, 860, paint);
+
+        //ItemOrder
+        int num=1, yAxis=850;
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        for(int i=0; i<ioList.size(); i++) {
+            yAxis += 50;
+            paint.setTextAlign(Paint.Align.LEFT);
+            canvas.drawText(ioList.get(i).getItemName(), 100, yAxis, paint);
+            canvas.drawText(Integer.toString(num), 40, yAxis, paint);
+            paint.setTextAlign(Paint.Align.RIGHT);
+            canvas.drawText(Integer.toString(ioList.get(i).getQuantity()), pageWidth-30, yAxis, paint);
+            canvas.drawLine(20, yAxis+15, pageWidth-20, yAxis+15, paint);
+            num+=1;
+        }
+
+        yAxis += 15;
+        canvas.drawLine(20, 860, 20, yAxis, paint);
+        canvas.drawLine(80, 860, 80, yAxis, paint);
+        canvas.drawLine(1010, 860, 1010, yAxis, paint);
+        canvas.drawLine(pageWidth-20, 860, pageWidth-20, yAxis, paint);
+        canvas.drawLine(20, yAxis, pageWidth-20, yAxis, paint);
+
+
+        //Draw Line
+        yAxis += 200;
+        paint.setColor(Color.rgb(0,0,0));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(3);
+        canvas.drawLine(100, yAxis, 450, yAxis, paint);
+        canvas.drawLine(700, yAxis, 1050, yAxis, paint);
+
+        yAxis +=30;
+        paint.setStyle(Paint.Style.FILL);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(25);
+        canvas.drawText("Authorized By", 273,yAxis, paint);
+
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+        paint.setTextSize(25);
+        canvas.drawText("Received By", 880,yAxis, paint);
+
+        yAxis += 200;
+
+        //Footer
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.rgb(255,69,0));
+        paint.setTextSize(30f);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("THANK YOU FOR YOUR BUSINESS ! ", pageWidth/2, yAxis, paint);
+
+
+        salesPdf.finishPage(page1);
+
+        File file = new File (getExternalFilesDir(null),"DeliveryOrder" + pack.getPackID() + ".pdf");
+
+
+        try {
+            salesPdf.writeTo(new FileOutputStream(file));
+            Toast.makeText(this, "Delivery Order PDF has been saved into your device", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Something wrong: " + e.toString(),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        salesPdf.close();
+
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
+            case R.id.download_sales: {
+
+                pdfGenerate();
+                return true;
+            }
 
             case R.id.addShipment: {
                 Intent intent = new Intent(this, add_shipment.class);
