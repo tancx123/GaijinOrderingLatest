@@ -8,15 +8,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
 import com.example.orderandinventorysystem.Model.Customer;
+import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.R;
-import com.example.orderandinventorysystem.ui.invoice.InvoiceMainFragment;
-import com.example.orderandinventorysystem.ui.sales.SalesOrderMainFragment;
+import com.example.orderandinventorysystem.ui.item.ItemMain;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -61,6 +62,7 @@ public class CustomerMain extends AppCompatActivity {
             finish();
             startActivity(intent);
         }
+
     }
 
     @Override
@@ -77,7 +79,7 @@ public class CustomerMain extends AppCompatActivity {
             case R.id.edit_sales: {
                 Intent intent = new Intent(this, edit_customer.class);
                 intent.putExtra("CustomerID", custID);
-                startActivityForResult(intent, 17);
+                startActivityForResult(intent, 20);
 
                 return true;
             }
@@ -126,7 +128,7 @@ public class CustomerMain extends AppCompatActivity {
                     ResultSet rs = stmt.executeQuery(query);
 
                     if(rs.next()){
-                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14));
                     }
 
                     Log.d("Success", "Done");
@@ -153,7 +155,7 @@ public class CustomerMain extends AppCompatActivity {
             TextView compName = (TextView)findViewById(R.id.comp_name);
             compName.setText(cust.getCompanyName());
             TextView custType = (TextView)findViewById(R.id.customer_type);
-            custType.setText(cust.getCustType() + " Customer");
+            custType.setText(cust.getCustType());
             TextView gender = (TextView)findViewById(R.id.gender);
             gender.setText(cust.getGender());
             TextView icNo = (TextView)findViewById(R.id.ic_number);
@@ -163,7 +165,7 @@ public class CustomerMain extends AppCompatActivity {
             TextView mobile = (TextView)findViewById(R.id.mobile);
             mobile.setText(cust.getMobile());
             TextView address = (TextView)findViewById(R.id.address);
-            address.setText(cust.getAddress());
+            address.setText(cust.getAddress() + "\n" + cust.getPostCode() + " " + cust.getCity() + " " + cust.getState());
             TextView email = (TextView)findViewById(R.id.email);
             email.setText(cust.getEmail());
 
@@ -196,7 +198,7 @@ public class CustomerMain extends AppCompatActivity {
                     checkConnection = "Please check your internet connection.";
                 } else {
 
-                    String query = " DELETE FROM CUSTOMER WHERE custID ='" + custID + "'";
+                    String query = " UPDATE CUSTOMER SET status='Removed' WHERE custID ='" + custID + "'";
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
                     Log.d("Success", "Done");
@@ -214,6 +216,9 @@ public class CustomerMain extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {}
+        protected void onPostExecute(String s) {
+
+            Toast.makeText(CustomerMain.this, "Customer deleted.", Toast.LENGTH_LONG).show();
+        }
     }
 }

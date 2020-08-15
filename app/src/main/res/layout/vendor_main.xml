@@ -35,10 +35,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cons"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
+                android:layout_height="144dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="vertical">
-
 
 
                 <TextView
@@ -61,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Vendor Name: "
+                    android:text="IC Number:"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vcomp_name" />
@@ -72,34 +71,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Vendor Tan"
+                    android:text="9923213123123"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textView4"
                     app:layout_constraintTop_toBottomOf="@+id/vcomp_name" />
-
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="smart@gmail.com"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView1"
-                    app:layout_constraintTop_toBottomOf="@+id/vendor" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="E-mail: "
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <TextView
                     android:id="@+id/vphone"
@@ -111,7 +87,7 @@
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textView7"
-                    app:layout_constraintTop_toBottomOf="@+id/email" />
+                    app:layout_constraintTop_toBottomOf="@+id/vendor" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -122,7 +98,7 @@
                     android:text="Phone:"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView1" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -153,9 +129,9 @@
                 android:id="@+id/f_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
                 android:padding="15dp"
+
                 android:stretchColumns="1">
 
                 <!-- first row of the table layout-->
@@ -170,7 +146,7 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Other Details"
+                        android:text="More Information"
                         android:textColor="#000"
                         android:textSize="14sp" />
 
@@ -190,7 +166,48 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Payment Terms"
+                        android:text="Address"
+                        android:textColor="#000"
+                        android:textSize="14sp" />
+
+                </TableRow>
+
+                <TableRow
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:paddingEnd="20dp"
+                    >
+
+                    <!-- first element of the row-->
+                    <TextView
+                        android:minLines="2"
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1212, Lorong Abu, Taman Abu"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp">
+
+                    <!-- first element of the row-->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
                         android:textColor="#000"
                         android:textSize="14sp" />
 
@@ -205,10 +222,10 @@
                     <!-- first element of the row-->
                     <TextView
 
-                        android:id="@+id/deposit_method"
+                        android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Due On Receipt"
+                        android:text="abu@abu.com"
                         android:textColor="#000"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -219,4 +236,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </RelativeLayout>

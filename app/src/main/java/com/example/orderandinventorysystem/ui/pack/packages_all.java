@@ -144,7 +144,7 @@ public class packages_all extends Fragment implements PackageListAdapter.ItemCli
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (packList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

@@ -1,5 +1,7 @@
 package com.example.orderandinventorysystem.ui.invoice;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,10 +25,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.orderandinventorysystem.Adapter.SectionsPagerAdapter;
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
+import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.Invoice;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.Model.Sales;
 import com.example.orderandinventorysystem.R;
+import com.example.orderandinventorysystem.ui.pack.PackageMain;
 import com.example.orderandinventorysystem.ui.payment.PaymentMain;
 import com.example.orderandinventorysystem.ui.sales.SalesOrderMainFragment;
 import com.example.orderandinventorysystem.ui.sales.edit_sales_orders;
@@ -47,6 +51,7 @@ import java.util.Locale;
 public class InvoiceMainFragment extends AppCompatActivity {
 
     Menu menu1;
+    Customer cust;
     boolean paymentCheck=false;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -114,14 +119,35 @@ public class InvoiceMainFragment extends AppCompatActivity {
             }
 
             case R.id.payment: {
-                setResult(4, getIntent().putExtra("Invoice", intentInvoiceID));
-                AddPayment addPayment = new AddPayment(intentInvoiceID);
-                addPayment.execute("");
-                this.finish();
-//                Intent intent;
-//                intent = new Intent(this, PaymentMain.class);
-//                intent.putExtra("Payment", intentInvoiceID);
-//                startActivityForResult(intent, 16);
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Once you mark as paid, you cannot revert your action. Confirm?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                setResult(4, getIntent().putExtra("Invoice", intentInvoiceID));
+                                AddPayment addPayment = new AddPayment(intentInvoiceID);
+                                addPayment.execute("");
+                                finish();
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
                 return true;
             }
 
@@ -245,32 +271,32 @@ public class InvoiceMainFragment extends AppCompatActivity {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         paint.setTextSize(20);
-        canvas.drawText("Abu Muhammad", 100,505, paint);
+        canvas.drawText(cust.getCompanyName(), 100,505, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("25, Jalan Pisang", 100,545, paint);
+        canvas.drawText(cust.getAddress(), 100,545, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("55302, Melaka Malaysia", 100,585, paint);
+        canvas.drawText(cust.getPostCode() + ", " + cust.getCity() + ", " + cust.getState(), 100,585, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Email : abu_0821@gmail.com", 100,625, paint);
+        canvas.drawText("Email : " + cust.getEmail(), 100,625, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Contact: 0123938472", 100,665, paint);
+        canvas.drawText("Phone: " + cust.getPhone(), 100,665, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Contact: 0123938472", 100,665, paint);
+        canvas.drawText("Mobile: " + cust.getMobile(), 100,705, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -282,11 +308,6 @@ public class InvoiceMainFragment extends AppCompatActivity {
         paint.setTextSize(20);
         canvas.drawText("Order Date : ", 800,625, paint);
 
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        paint.setTextSize(20);
-        canvas.drawText("Sales Person : ", 800,665, paint);
-
         paint.setTextAlign(Paint.Align.RIGHT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
@@ -296,11 +317,6 @@ public class InvoiceMainFragment extends AppCompatActivity {
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
         canvas.drawText(invoice.getInvDate(), 1050,625, paint);
-
-        paint.setTextAlign(Paint.Align.RIGHT);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        paint.setTextSize(20);
-        canvas.drawText("SpongeBob", 1050,665, paint);
 
         //Columns Name
         paint.setTextSize(20f);
@@ -377,6 +393,8 @@ public class InvoiceMainFragment extends AppCompatActivity {
         paint.setTextAlign(Paint.Align.RIGHT);
         canvas.drawText(String.format("%.2f", invoice.getInvPrice()), pageWidth-30, yAxis, paint);
 
+        yAxis = pageHeight - 600;
+
         //Draw Line
         yAxis += 200;
         paint.setColor(Color.rgb(0,0,0));
@@ -417,7 +435,7 @@ public class InvoiceMainFragment extends AppCompatActivity {
             Toast.makeText(this, "Invoice PDF has been saved into your device", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(),
+            Toast.makeText(this, "Please allow the storage permission for this application in your android settings",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -491,7 +509,7 @@ public class InvoiceMainFragment extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
+            Toast.makeText(InvoiceMainFragment.this, "Invoice deleted.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -529,6 +547,26 @@ public class InvoiceMainFragment extends AppCompatActivity {
                         invoice = new Invoice(rs.getString(1), rs.getString(2),
                                 rs.getString(3), rs.getString(4),
                                 rs.getString(5), rs.getDouble(6), rs.getString(7));
+                    }
+
+                    String custID="";
+                    query = " SELECT * FROM SALES WHERE salesID ='" + invoice.getSalesID() + "'";
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    if (rs.next()) {
+
+                        custID = rs.getString(2);
+                    }
+
+                    query = " SELECT * FROM CUSTOMER WHERE custID ='" + custID + "'";
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    if (rs.next()) {
+
+                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3),
+                                rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                                rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11),
+                                rs.getString(12),rs.getString(13), rs.getString(14));
                     }
 
                     query = " SELECT * FROM ITEMORDER WHERE orderID ='" + invoice.getSalesID() + "'";
@@ -671,6 +709,7 @@ public class InvoiceMainFragment extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Toast.makeText(InvoiceMainFragment.this, "Payment added.", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -38,11 +38,11 @@ public class sales_remove extends Fragment implements SalesListAdapter.ItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_sales, container, false);
+        root = inflater.inflate(R.layout.fragment_sales_r, container, false);
         salesList = new ArrayList<>();
         ShowSalesList showSalesList = new ShowSalesList();
         showSalesList.execute("");
-
+        con = root.findViewById(R.id.connection);
         recyclerView = root.findViewById(R.id.sales_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new SalesListAdapter(getContext(), salesList);
@@ -129,7 +129,7 @@ public class sales_remove extends Fragment implements SalesListAdapter.ItemClick
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (salesList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

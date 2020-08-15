@@ -1,51 +1,57 @@
 package com.example.orderandinventorysystem.Model;
 
-public class Bill {
+import java.io.Serializable;
 
-    private String venName, billNo, dDate, bDate, tax;
+public class Bill implements Serializable {
 
-    public Bill(String venName, String billNo, String bDate, String dDate, String tax) {
-        this.venName = venName;
-        this.billNo = billNo;
-        this.dDate = dDate;
-        this.bDate = bDate;
-        this.tax = tax;
+    String billID, pID, pCust, billDate;
+    double billAmount;
+
+    public Bill(String billID, String pID, String pCust, String billDate, double billAmount) {
+        this.billID = billID;
+        this.pID = pID;
+        this.pCust = pCust;
+        this.billDate = billDate;
+        this.billAmount = billAmount;
     }
 
-    public String getVenName() {
-        return venName;
+    public String getBillID() {
+        return billID;
     }
 
-    public void setVenName(String venName) {
-        this.venName = venName;
+    public void setBillID(String billID) {
+        this.billID = billID;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public String getpID() {
+        return pID;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public void setpID(String pID) {
+        this.pID = pID;
     }
 
-    public String getdDate() {
-        return dDate;
+    public String getpCust() {
+        return pCust;
     }
 
-    public void setdDate(String phone) {
-        this.dDate = dDate;
+    public void setpCust(String pCust) {
+        this.pCust = pCust;
     }
 
-    public String getbDate() { return bDate; }
-
-    public void setbDate(String mobile) {
-        this.bDate = bDate;
+    public String getBillDate() {
+        return billDate;
     }
 
-    public String getTax() { return tax; }
-
-    public void setTax(String tax) {
-        this.tax = tax;
+    public void setBillDate(String billDate) {
+        this.billDate = billDate;
     }
 
+    public double getBillAmount() {
+        return billAmount;
+    }
+
+    public void setBillAmount(double billAmount) {
+        this.billAmount = billAmount;
+    }
 }

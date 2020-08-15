@@ -37,7 +37,7 @@ public class InvoiceFragment extends Fragment implements InvoiceListAdapter.Item
 
         root = inflater.inflate(R.layout.fragment_invoice, container, false);
         invList = new ArrayList<>();
-
+        con = root.findViewById(R.id.connection);
         ShowInvList showInvList = new ShowInvList();
         showInvList.execute("");
         recyclerView = root.findViewById(R.id.inv_recycler_view);
@@ -124,7 +124,7 @@ public class InvoiceFragment extends Fragment implements InvoiceListAdapter.Item
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (invList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

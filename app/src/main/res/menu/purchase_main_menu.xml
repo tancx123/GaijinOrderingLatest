@@ -9,8 +9,17 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/download_sales"
+        android:title="Download PDF"
+        />
+
+    <item
+        android:id="@+id/paid"
+        android:title="Mark As Paid"/>
+
+    <item
         android:id="@+id/delete"
-        android:title="Delete"
+        android:title="Delete Purchase Order"
         />
 
 </menu>

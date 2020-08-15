@@ -43,7 +43,7 @@ public class sales_avail extends Fragment implements SalesListAdapter.ItemClickL
         salesList = new ArrayList<>();
         ShowSalesList showSalesList = new ShowSalesList();
         showSalesList.execute("");
-
+        con = root.findViewById(R.id.connection);
         recyclerView = root.findViewById(R.id.sales_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new SalesListAdapter(getContext(), salesList);
@@ -135,7 +135,7 @@ public class sales_avail extends Fragment implements SalesListAdapter.ItemClickL
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (salesList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

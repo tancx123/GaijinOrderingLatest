@@ -192,7 +192,7 @@ public class add_sales_line_item extends AppCompatActivity implements ItemListAd
                     checkConnection = "No";
                 } else {
 
-                    String query = " SELECT * FROM ITEM ";
+                    String query = " SELECT * FROM ITEM WHERE itemstatus='Available'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 

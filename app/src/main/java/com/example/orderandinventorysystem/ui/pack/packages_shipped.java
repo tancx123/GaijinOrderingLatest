@@ -36,7 +36,7 @@ public class packages_shipped extends Fragment implements PackageListAdapter.Ite
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_packages_all, container, false);
+        root = inflater.inflate(R.layout.fragment_packages_ship, container, false);
         packList = new ArrayList<>();
         salesList = new ArrayList<>();
         ShowPackShipped showPackShipped = new ShowPackShipped();
@@ -140,7 +140,7 @@ public class packages_shipped extends Fragment implements PackageListAdapter.Ite
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (packList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

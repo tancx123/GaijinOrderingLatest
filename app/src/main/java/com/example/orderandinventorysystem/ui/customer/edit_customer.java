@@ -18,10 +18,12 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
 import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.R;
+import com.example.orderandinventorysystem.ui.item.ItemMain;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.concurrent.ExecutionException;
 
 public class edit_customer extends AppCompatActivity {
     RadioGroup custType;
@@ -35,6 +37,9 @@ public class edit_customer extends AppCompatActivity {
     EditText custMobile;
     EditText custAddress;
     EditText custIC;
+    EditText postCode;
+    EditText city;
+    EditText state;
 
     String gender;
     String custTypeText;
@@ -72,8 +77,9 @@ public class edit_customer extends AppCompatActivity {
             case R.id.save: {
 
                 Toast toast = Toast.makeText(getApplicationContext(), "Please fill up the error field", Toast.LENGTH_SHORT);
+                boolean nameValidate = false, ICValidate = false, emailValidate = false, phoneValidate = false, mobileValidate = false, postCodeValidate = false, cityValidate = false, stateValidate = false;
 
-                if (custName.getText().toString().isEmpty() || custIC.getText().toString().isEmpty() || custEmail.getText().toString().isEmpty() || companyPhone.getText().toString().isEmpty() || custMobile.getText().toString().isEmpty() || companyName.getText().toString().isEmpty() || custAddress.getText().toString().isEmpty()) {
+                if (custName.getText().toString().isEmpty() || custIC.getText().toString().isEmpty() || custEmail.getText().toString().isEmpty() || companyPhone.getText().toString().isEmpty() || custMobile.getText().toString().isEmpty() || companyName.getText().toString().isEmpty() || custAddress.getText().toString().isEmpty() || postCode.getText().toString().isEmpty() || city.getText().toString().isEmpty() || state.getText().toString().isEmpty()) {
 
                     if (custName.getText().toString().isEmpty())
                         custName.setError("Please enter this field");
@@ -96,47 +102,102 @@ public class edit_customer extends AppCompatActivity {
                     if (custAddress.getText().toString().isEmpty())
                         custAddress.setError("Please enter this field");
 
+                    if (postCode.getText().toString().isEmpty())
+                        postCode.setError("Please enter this field");
+
+                    if (city.getText().toString().isEmpty())
+                        city.setError("Please enter this field");
+
+                    if (state.getText().toString().isEmpty())
+                        state.setError("Please enter this field");
+
                     toast.show();
 
-                } else if (!custName.getText().toString().matches("[a-zA-Z ]+")) {
-                    custName.setError("Only A-Z allow");
-                    toast.show();
-
-                } else if (!custIC.getText().toString().matches("^[0-9]*$")) {
-                    custIC.setError("Enter your IC without (-)");
-                    toast.show();
-
-                } else if (!custIC.getText().toString().matches("^(\\d{12})$")) {
-                    custIC.setError("IC No. have 12 digit");
-                    toast.show();
-
-                } else if (!custEmail.getText().toString().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
-                    custEmail.setError("example@gmail.com");
-                    toast.show();
-
-                } else if (!companyPhone.getText().toString().matches("^[0-9]*$")) {
-                    companyPhone.setError("Enter your company Phone No. without (-)");
-                    toast.show();
-
-                } else if (!companyPhone.getText().toString().matches("^(\\d{9}|\\d{10}|\\d{11}|\\d{12})$")) {
-                    companyPhone.setError("Phone No. should be 9-12 digit");
-                    toast.show();
-                } else if (!custMobile.getText().toString().matches("^[0-9]*$")) {
-                    custMobile.setError("Enter your Mobile No. without (-)");
-                    toast.show();
-                } else if (!custMobile.getText().toString().matches("^(\\d{10}|\\d{11}|\\d{12})$")) {
-                    custMobile.setError("Phone No. should be 10-12 digit");
-                    toast.show();
                 } else {
 
+                    if (!custName.getText().toString().matches("[a-zA-Z ]+")) {
+                        custName.setError("Only A-Z allow");
+                        toast.show();
+                    } else {
+                        nameValidate = true;
+                    }
+
+                    if (!custIC.getText().toString().matches("^[0-9]*$")) {
+                        custIC.setError("IC No. only contain 0-9");
+                        toast.show();
+                    } else if (!custIC.getText().toString().matches("^(\\d{12})$")) {
+                        custIC.setError("IC No. have 12 digit");
+                        toast.show();
+                    } else {
+                        ICValidate = true;
+                    }
+
+                    if (!custEmail.getText().toString().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
+                        custEmail.setError("example@gmail.com");
+                        toast.show();
+                    } else {
+                        emailValidate = true;
+                    }
+
+                    if (!companyPhone.getText().toString().matches("^[0-9]*$")) {
+                        companyPhone.setError("Enter your company Phone No. without (-)");
+                        toast.show();
+                    } else if (!companyPhone.getText().toString().matches("^(\\d{9}|\\d{10}|\\d{11}|\\d{12})$")) {
+                        companyPhone.setError("phone No. should be 9-12 digit");
+                        toast.show();
+                    } else {
+                        phoneValidate = true;
+                    }
+
+                    if (!custMobile.getText().toString().matches("^[0-9]*$")) {
+                        custMobile.setError("Enter your Mobile No. without (-)");
+                        toast.show();
+                    } else if (!custMobile.getText().toString().matches("^(\\d{10}|\\d{11}|\\d{12})$")) {
+                        custMobile.setError("phone No. should be 10-12 digit");
+                        toast.show();
+                    } else {
+                        mobileValidate = true;
+                    }
+
+                    if (!city.getText().toString().matches("[a-zA-Z ]+")) {
+                        city.setError("Only A-Z allow");
+                        toast.show();
+                    } else {
+                        cityValidate = true;
+                    }
+
+                    if (!state.getText().toString().matches("[a-zA-Z ]+")) {
+                        state.setError("Only A-Z allow");
+                        toast.show();
+                    } else {
+                        stateValidate = true;
+                    }
+
+                    if (!postCode.getText().toString().matches("^[0-9]*$")) {
+                        postCode.setError("Only 0-9 allow");
+                    } else if (!postCode.getText().toString().matches("^(\\d{5})$")) {
+                        postCode.setError("post code only have 5 digit");
+                        toast.show();
+                    } else {
+                        postCodeValidate = true;
+
+                    }
+
+
+                }
+
+                if (nameValidate == true && ICValidate == true && emailValidate == true && phoneValidate == true && mobileValidate == true && postCodeValidate == true && cityValidate == true && stateValidate == true) {
                     //constructor
-                    Customer cust = new Customer("0", custName.getText().toString(), custIC.getText().toString(), custEmail.getText().toString(), companyPhone.getText().toString(), custMobile.getText().toString(), companyName.getText().toString(), gender, custTypeText, custAddress.getText().toString());
+                    Customer cust = new Customer("0", custName.getText().toString(), custIC.getText().toString(), custEmail.getText().toString(), companyPhone.getText().toString(), custMobile.getText().toString(), companyName.getText().toString(), gender, custTypeText, custAddress.getText().toString(), postCode.getText().toString(), city.getText().toString(), state.getText().toString(), "Available");
                     UpdateCust updateCust = new UpdateCust(cust);
                     updateCust.execute("");
                     setResult(3);
-                    this.finish();
+                    finish();
 
                     return true;
+                }else{
+
+                    toast.show();
                 }
             }
 
@@ -190,7 +251,7 @@ public class edit_customer extends AppCompatActivity {
                     ResultSet rs = stmt.executeQuery(query);
 
                     if (rs.next()) {
-                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10));
+                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13), rs.getString(14));
                     }
 
                     Log.d("Success", "Done");
@@ -223,7 +284,9 @@ public class edit_customer extends AppCompatActivity {
             radioFemale = findViewById(R.id.radioBtn_Female);
             radioBusiness = findViewById(R.id.radioBtn_Business);
             radioIndividual = findViewById(R.id.radioBtn_Individual);
-
+            postCode = findViewById(R.id.text_postCode_input);
+            city = findViewById(R.id.text_city_input);
+            state = findViewById(R.id.text_state_input);
 
             custType = findViewById(R.id.group_custType);
             custGender = findViewById(R.id.group_gender);
@@ -235,6 +298,9 @@ public class edit_customer extends AppCompatActivity {
             custMobile.setText(cust.getMobile());
             companyName.setText(cust.getCompanyName());
             custAddress.setText(cust.getAddress());
+            postCode.setText(cust.getPostCode());
+            city.setText(cust.getCity());
+            state.setText(cust.getState());
             gender = cust.getGender();
             custTypeText = cust.getCustType();
 
@@ -319,15 +385,18 @@ public class edit_customer extends AppCompatActivity {
                     checkConnection = "No";
                 } else {
                     String query = " UPDATE CUSTOMER SET custName = '" + customer.getCustName() + "', "+
-                                "icNo = '" + customer.getIcNo() + "'," +
-                                "email = '" + customer.getEmail() + "'," +
-                                "phone = '" + customer.getPhone() + "'," +
-                                "mobile = '" + customer.getMobile() + "'," +
-                                "companyName = '" + customer.getCompanyName() + "'," +
-                                "gender = '" + customer.getGender() + "'," +
-                                "custType = '" + customer.getCustType() + "'," +
-                                "address = '" + customer.getAddress() + "'" +
-                                " WHERE custID = '" + custID + "'";
+                            "icNo = '" + customer.getIcNo() + "'," +
+                            "email = '" + customer.getEmail() + "'," +
+                            "phone = '" + customer.getPhone() + "'," +
+                            "mobile = '" + customer.getMobile() + "'," +
+                            "companyName = '" + customer.getCompanyName() + "'," +
+                            "gender = '" + customer.getGender() + "'," +
+                            "custType = '" + customer.getCustType() + "'," +
+                            "address = '" + customer.getAddress() + "'," +
+                            "postCode = '" + customer.getPostCode() + "'," +
+                            "city = '" + customer.getCity() + "'," +
+                            "state = '" + customer.getState() + "'" +
+                            " WHERE custID = '" + custID + "'";
 
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
@@ -347,6 +416,7 @@ public class edit_customer extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
+            Toast.makeText(edit_customer.this, "Customer edited.", Toast.LENGTH_LONG).show();
         }
     }
 }

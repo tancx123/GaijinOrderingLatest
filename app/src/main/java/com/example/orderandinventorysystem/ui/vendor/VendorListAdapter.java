@@ -8,9 +8,11 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.Vendor;
 import com.example.orderandinventorysystem.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.ViewHolder>{
@@ -18,11 +20,13 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.Vi
     private List<Vendor> mData;
     private LayoutInflater mInflater;
     private VendorListAdapter.ItemClickListener mClickListener;
+    private List<Vendor> mDataAll;
 
     // data is passed into the constructor
     public VendorListAdapter(Context context, List<Vendor> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mDataAll = data;
     }
 
     // inflates the row layout from xml when needed
@@ -40,8 +44,7 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.Vi
         holder.comp.setText(vend.getCompanyName());
         holder.phone.setText(vend.getPhone());
         holder.mobile.setText(vend.getMobile());
-
-
+        holder.id.setText(vend.getVenID());
     }
 
     // total number of rows
@@ -50,9 +53,14 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.Vi
         return mData.size();
     }
 
+    public void filterList(ArrayList<Vendor> filteredList) {
+        mData = filteredList;
+        notifyDataSetChanged();
+    }
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView, comp, phone, mobile;
+        TextView myTextView, comp, phone, mobile, id;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -60,13 +68,14 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.Vi
             comp = itemView.findViewById(R.id.com_name_view);
             phone = itemView.findViewById(R.id.vphone_view);
             mobile = itemView.findViewById(R.id.vmobile_view);
+            id = itemView.findViewById(R.id.ven_id);
 
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition(), id.getText().toString(), myTextView.getText().toString());
         }
     }
 
@@ -82,6 +91,6 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.Vi
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position, String id, String name);
     }
 }

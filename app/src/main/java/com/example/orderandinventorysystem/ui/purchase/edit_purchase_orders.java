@@ -1,4 +1,4 @@
-package com.example.orderandinventorysystem.ui.sales;
+package com.example.orderandinventorysystem.ui.purchase;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,29 +27,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
 import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.ItemOrder;
+import com.example.orderandinventorysystem.Model.Purchase;
 import com.example.orderandinventorysystem.Model.Sales;
+import com.example.orderandinventorysystem.Model.Vendor;
 import com.example.orderandinventorysystem.R;
 import com.example.orderandinventorysystem.ui.customer.CustomerListAdapter;
+import com.example.orderandinventorysystem.ui.sales.ItemOrderListAdapter;
+import com.example.orderandinventorysystem.ui.sales.SalesOrderMainFragment;
+import com.example.orderandinventorysystem.ui.sales.add_sales_line_item;
+import com.example.orderandinventorysystem.ui.vendor.VendorListAdapter;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class edit_sales_orders extends AppCompatActivity implements CustomerListAdapter.ItemClickListener, ItemOrderListAdapter.ItemClickListener {
+public class edit_purchase_orders extends AppCompatActivity implements VendorListAdapter.ItemClickListener, ItemOrderListAdapter.ItemClickListener {
 
     RelativeLayout relativeLayout;
     private Button BtnAddLine;
-    CustomerListAdapter adapter;
+    VendorListAdapter adapter;
     ItemOrderListAdapter adapter2;
     ArrayList<ItemOrder> ioList = new ArrayList<>();
-    ArrayList<Customer> custList;
-    Sales salesEdit;
-    String custID;
+    ArrayList<Vendor> vendorList;
+    Purchase purchaseEdit;
+    String venID;
     RecyclerView recyclerView, recyclerView2;
     EditText editText;
     TextView date;
@@ -59,24 +62,24 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_sales_orders);
+        setContentView(R.layout.activity_add_p_orders);
 
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Edit Sales Order");
+        getSupportActionBar().setTitle("Edit Purchase Order");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
-        salesEdit = (Sales) intent.getSerializableExtra("SalesEdit");
+        purchaseEdit = (Purchase) intent.getSerializableExtra("PurchaseEdit");
         ioList = new ArrayList<>();
         BtnAddLine = findViewById(R.id.add_sales_line_item_btn);
 
-        custList = new ArrayList<>();
+        vendorList = new ArrayList<>();
 
         recyclerView = findViewById(R.id.custSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CustomerListAdapter(this, custList);
+        adapter = new VendorListAdapter(this, vendorList);
 
         recyclerView2 = findViewById(R.id.itemLine);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
@@ -89,9 +92,9 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
         relativeLayout = findViewById(R.id.itemLineLayout);
         relativeLayout.setVisibility(View.VISIBLE);
         date =  findViewById(R.id.text_sales_order_date_input);
-        date.setText(salesEdit.getSalesDate());
+        date.setText(purchaseEdit.getdDate());
         editText = findViewById(R.id.text_customer_name_input_sales);
-        editText.setText(salesEdit.getSaleCustName());
+        editText.setText(purchaseEdit.getVenName());
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener(){
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -134,23 +137,22 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
             e.printStackTrace();
         }
 
-
     }
 
     @Override
     public void onItemClick(View view, int position, String id, String name) {
         editText.getText().clear();
         checkCustName = true;
-        custID = id;
+        venID = id;
         editText.setText(name);
         editText.clearFocus();
     }
 
     public void filter(String text) {
-        ArrayList<Customer> filteredList = new ArrayList<>();
+        ArrayList<Vendor> filteredList = new ArrayList<>();
 
-        for (Customer item : custList) {
-            if (item.getCustName().toLowerCase().contains(text.toLowerCase())) {
+        for (Vendor item : vendorList) {
+            if (item.getVenName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
@@ -191,11 +193,11 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
 
                 if(checkCustName && !ioList.isEmpty()){
 
-                    Sales sales = new Sales(salesEdit.getSalesID(), custID, editText.getText().toString(), date.getText().toString(), total, "Confirmed");
-                    AddSales addSales = new AddSales(sales, ioList);
+                    Purchase purchase = new Purchase(purchaseEdit.getpID(), venID, editText.getText().toString(), date.getText().toString(), "Confirmed", total);
+                    AddSales addSales = new AddSales(purchase, ioList);
                     addSales.execute("");
-                    Intent intent = new Intent(this, SalesOrderMainFragment.class);
-                    intent.putExtra("Sales", sales.getSalesID());
+                    Intent intent = new Intent(this, PurchaseMain.class);
+                    intent.putExtra("Purchase", purchase.getpID());
                     startActivity(intent);
                     setResult(2);
                     finish();
@@ -204,7 +206,7 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
                 }else{
 
                     if (!checkCustName)
-                        editText.setError("Invalid customer name !");
+                        editText.setError("Invalid vendor name !");
                     if (ioList.isEmpty())
                         Toast.makeText(getApplicationContext(),"You must add at least one item line !",Toast.LENGTH_SHORT).show();
                 }
@@ -322,16 +324,16 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
                     checkConnection = "No";
                 } else {
 
-                    String query = " SELECT * FROM CUSTOMER WHERE STATUS='Available' ";
+                    String query = " SELECT * FROM VENDOR WHERE STATUS='Available'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
                     while (rs.next()) {
-                        custList.add(new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13),  rs.getString(14)));
+                        vendorList.add(new Vendor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12)));
                         Log.d("Success", rs.getString(1));
                     }
 
-                    query = " SELECT * FROM ITEMORDER WHERE ORDERID= '" + salesEdit.getSalesID() + "'";
+                    query = " SELECT * FROM ITEMORDER WHERE ORDERID= '" + purchaseEdit.getpID() + "'";
                     stmt = con.createStatement();
                     rs = stmt.executeQuery(query);
 
@@ -369,20 +371,20 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
     public class AddSales extends AsyncTask<String,String,String> {
 
         ArrayList<ItemOrder> ioList;
-        Sales sales;
+        Purchase sales;
         String checkConnection = "";
         boolean isSuccess = false;
 
-        public Sales getSales() {
+        public Purchase getSales() {
             return sales;
         }
 
-        public void setSales(Sales sales) {
-            this.sales = sales;
+        public void setSales(Purchase purchase) {
+            this.sales = purchase;
         }
 
-        AddSales(Sales sales, ArrayList<ItemOrder> ioList) {
-            this.sales = sales;
+        AddSales(Purchase purchase, ArrayList<ItemOrder> ioList) {
+            this.sales = purchase;
             this.ioList = ioList;
         }
 
@@ -400,14 +402,14 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
                 if (con == null) {
                     checkConnection = "No";
                 } else {
-                    String query = "UPDATE SALES SET SALESCUSTID='" + sales.getSalesCustID() + "', SALESCUSTNAME='" +
-                            sales.getSaleCustName() + "', SALESDATE='" + sales.getSalesDate() + "', SALESSTATUS='" + sales.getSalesStatus() + "', SALESPRICE='" +
-                            sales.getSalesPrice() + "' WHERE SALESID = '" + sales.getSalesID()+"'";
+                    String query = "UPDATE PURCHASE SET VENID='" + sales.getVenID() + "', VENNAME='" +
+                            sales.getVenName() + "', pDATE='" + sales.getdDate() + "', pSTATUS='" + sales.getpStatus() + "', amount='" +
+                            sales.getpAmount() + "' WHERE PID = '" + sales.getpID()+"'";
 
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate(query);
 
-                    query = "DELETE FROM ITEMORDER WHERE ORDERID='" + sales.getSalesID() + "'";
+                    query = "DELETE FROM ITEMORDER WHERE ORDERID='" + sales.getpID() + "'";
 
                     stmt = con.createStatement();
                     stmt.executeUpdate(query);
@@ -415,7 +417,7 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
                     for (ItemOrder io : ioList) {
 
 
-                        query = "INSERT INTO ITEMORDER VALUES ('" + sales.getSalesID() + "', '" + io.getItemID() + "', '" +
+                        query = "INSERT INTO ITEMORDER VALUES ('" + sales.getpID() + "', '" + io.getItemID() + "', '" +
                                 io.getItemName() + "', '" + io.getSellPrice() + "', '" + io.getTotal() + "', '" +
                                 io.getQuantity() + "','" + io.getDiscount() + "')";
 
@@ -437,7 +439,7 @@ public class edit_sales_orders extends AppCompatActivity implements CustomerList
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(edit_sales_orders.this, "Sales Order edited.", Toast.LENGTH_LONG).show();
+            Toast.makeText(edit_purchase_orders.this, "Purchase Order edited.", Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -37,7 +37,7 @@ public class packages_delivered extends Fragment implements PackageListAdapter.I
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_packages_all, container, false);
+        root = inflater.inflate(R.layout.fragment_packages_del, container, false);
         packList = new ArrayList<>();
         salesList = new ArrayList<>();
         ShowPackDelivered showPackDelivered = new ShowPackDelivered();
@@ -141,7 +141,7 @@ public class packages_delivered extends Fragment implements PackageListAdapter.I
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (packList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

@@ -290,7 +290,7 @@ public class add_item extends AppCompatActivity {
 
                     query = "INSERT INTO ITEM VALUES('" + latestID + "', '" + item.getItemName() + "', '" +
                             item.getItemUnit() + "', '" + item.getItemDesc() + "', '" + item.getQuantity() + "', '" +
-                            item.getQuantityPHY() + "' , '" + item.getSellPrice() + "', '" + item.getCostPrice() + "')";
+                            item.getQuantityPHY() + "' , '" + item.getSellPrice() + "', '" + item.getCostPrice() + "', 'Available')";
 
                     stmt = con.createStatement();
                     stmt.executeUpdate(query);
@@ -306,6 +306,12 @@ public class add_item extends AppCompatActivity {
             }
 
             return checkConnection;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            Toast.makeText(add_item.this, "Item added.", Toast.LENGTH_LONG).show();
         }
     }
 }

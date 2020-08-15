@@ -105,15 +105,15 @@
 
             </RadioGroup>
 
-
             <TextView
                 android:id="@+id/text_firstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Name *"
+                android:text="Name"
                 android:textColor="#000000"
                 android:textSize="18sp"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/group_custType"
                 app:layout_constraintTop_toBottomOf="@+id/group_custType" />
 
@@ -123,7 +123,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:hint="John"
+                android:hint="Abu"
+                app:layout_constraintEnd_toEndOf="@+id/text_firstName"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_firstName"
                 app:layout_constraintTop_toBottomOf="@+id/text_firstName" />
 
@@ -131,10 +133,12 @@
                 android:id="@+id/text_custIc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="IC Number *"
+                android:layout_marginTop="25dp"
+                android:text="IC"
                 android:textColor="#000000"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_custName_input"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_custName_input"
                 app:layout_constraintTop_toBottomOf="@+id/text_custName_input" />
 
@@ -144,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="700223XXXXXX"
+                android:hint="Enter IC without (-)"
                 app:layout_constraintEnd_toEndOf="@+id/text_custIc"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_custIc"
@@ -204,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Email *"
+                android:text="Email"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/group_gender"
@@ -229,7 +233,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Mobile *"
+                android:text="Mobile"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/text_email_input"
@@ -243,7 +247,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="0121234567"
+                android:hint="Enter mobile without (-)"
                 app:layout_constraintEnd_toEndOf="@+id/text_custMobile"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_custMobile"
@@ -252,7 +256,7 @@
             <TextView
                 android:id="@+id/group_other_info"
                 android:layout_width="0dp"
-                android:layout_height="400dp"
+                android:layout_height="620dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
@@ -280,7 +284,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Company Name *"
+                android:text="Company Name"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/title_other_detail"
@@ -294,7 +298,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="Abu Sdn Bhd"
+                android:hint="Abu Company"
                 app:layout_constraintEnd_toEndOf="@+id/text_company_name"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_company_name"
@@ -305,7 +309,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Address *"
+                android:text="Address"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/text_company_name_input"
@@ -319,18 +323,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="122, Lorong Nanas..."
+                android:hint="132, Lorong Nanas 2, Taman Nanas"
                 app:layout_constraintEnd_toEndOf="@+id/text_address"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_address"
                 app:layout_constraintTop_toBottomOf="@+id/text_address" />
 
             <TextView
-                android:id="@+id/text_phone"
+                android:id="@+id/text_postCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Phone *"
+                android:text="PostCode"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/text_address_input"
@@ -339,12 +343,87 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_address_input" />
 
             <EditText
+                android:id="@+id/text_postCode_input"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="09809"
+                app:layout_constraintEnd_toEndOf="@+id/text_postCode"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_postCode"
+                app:layout_constraintTop_toBottomOf="@+id/text_postCode" />
+
+            <TextView
+                android:id="@+id/text_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="City"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toEndOf="@+id/text_postCode_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_address_input" />
+
+            <EditText
+                android:id="@+id/text_city_input"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Kulim"
+                app:layout_constraintEnd_toEndOf="@+id/text_city"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_city"
+                app:layout_constraintTop_toBottomOf="@+id/text_city" />
+
+            <TextView
+                android:id="@+id/text_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="State"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_postCode_input"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_postCode_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_postCode_input" />
+
+            <EditText
+                android:id="@+id/text_state_input"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Kedah"
+                app:layout_constraintEnd_toEndOf="@+id/text_state"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_state"
+                app:layout_constraintTop_toBottomOf="@+id/text_state" />
+
+            <TextView
+                android:id="@+id/text_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Phone"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_state_input"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_state_input"
+                app:layout_constraintTop_toBottomOf="@+id/text_state_input" />
+
+            <EditText
                 android:id="@+id/text_phone_input"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ems="10"
-                android:hint="041234567"
+                android:hint="Enter phone without (-)"
                 app:layout_constraintEnd_toEndOf="@+id/text_phone"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/text_phone"

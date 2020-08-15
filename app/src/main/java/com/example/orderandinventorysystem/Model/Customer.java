@@ -4,26 +4,63 @@ import java.io.Serializable;
 
 public class Customer implements Serializable {
 
-    private String custID, custName, icNo, companyName, email, phone, mobile, custType, gender, address;
+    private String custID, custName, icNo, email, phone, mobile, companyName, gender, custType, address, postCode, city, state, status;
 
-    public Customer(String custID, String custName, String icNo, String email, String phone, String mobile, String companyName, String gender, String custType, String address) {
+    public Customer(String custID, String custName, String icNo, String email, String phone, String mobile, String companyName, String gender, String custType, String address, String postCode, String city, String state, String status) {
+
         this.custID = custID;
         this.custName = custName;
         this.icNo = icNo;
-        this.companyName = companyName;
         this.email = email;
         this.phone = phone;
         this.mobile = mobile;
-        this.custType = custType;
+        this.companyName = companyName;
         this.gender = gender;
+        this.custType = custType;
         this.address = address;
+        this.postCode = postCode;
+        this.city = city;
+        this.state = state;
+        this.status = status;
     }
 
-    public String getCustID() {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getCustID(){
         return custID;
     }
 
-    public void setCustID(String custID) {
+    public void setCustID(String custID){
         this.custID = custID;
     }
 

@@ -24,6 +24,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.orderandinventorysystem.Adapter.SectionsPagerAdapter;
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
+import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.Invoice;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.Model.Sales;
@@ -48,6 +49,7 @@ import java.util.Locale;
 public class SalesOrderMainFragment extends AppCompatActivity {
 
     Menu menu1;
+    Customer cust;
     ViewPager viewPager;
     TabLayout tabLayout;
     ArrayList<ItemOrder> ioList;
@@ -246,32 +248,32 @@ public class SalesOrderMainFragment extends AppCompatActivity {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         paint.setTextSize(20);
-        canvas.drawText("Abu Muhammad", 100,505, paint);
+        canvas.drawText(cust.getCompanyName(), 100,505, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("25, Jalan Pisang", 100,545, paint);
+        canvas.drawText(cust.getAddress(), 100,545, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("55302, Melaka Malaysia", 100,585, paint);
+        canvas.drawText(cust.getPostCode() + ", " + cust.getCity() + ", " + cust.getState(), 100,585, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Email : abu_0821@gmail.com", 100,625, paint);
+        canvas.drawText("Email : " + cust.getEmail(), 100,625, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Contact: 0123938472", 100,665, paint);
+        canvas.drawText("Phone: " + cust.getPhone(), 100,665, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Contact: 0123938472", 100,665, paint);
+        canvas.drawText("Mobile: " + cust.getMobile(), 100,705, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -283,11 +285,6 @@ public class SalesOrderMainFragment extends AppCompatActivity {
         paint.setTextSize(20);
         canvas.drawText("Order Date : ", 800,625, paint);
 
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        paint.setTextSize(20);
-        canvas.drawText("Sales Person : ", 800,665, paint);
-
         paint.setTextAlign(Paint.Align.RIGHT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
@@ -297,11 +294,6 @@ public class SalesOrderMainFragment extends AppCompatActivity {
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
         canvas.drawText(sales.getSalesDate(), 1050,625, paint);
-
-        paint.setTextAlign(Paint.Align.RIGHT);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        paint.setTextSize(20);
-        canvas.drawText("SpongeBob", 1050,665, paint);
 
         //Columns Name
         paint.setTextSize(20f);
@@ -397,7 +389,7 @@ public class SalesOrderMainFragment extends AppCompatActivity {
             Toast.makeText(this, "Sales Order PDF has been saved into your device", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(),
+            Toast.makeText(this, "Please allow the storage permission for this application in your android settings",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -471,6 +463,17 @@ public class SalesOrderMainFragment extends AppCompatActivity {
                                 rs.getDouble(6), rs.getString(5));
                     }
 
+                    query = " SELECT * FROM CUSTOMER WHERE custID ='" + salesDB.getSalesCustID() + "'";
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    if (rs.next()) {
+
+                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3),
+                                rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                                rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11),
+                                rs.getString(12),rs.getString(13), rs.getString(14));
+                    }
+
                     query = " SELECT * FROM INVOICE WHERE salesID ='" + salesID + "'";
                     stmt = con.createStatement();
                     rs = stmt.executeQuery(query);
@@ -533,6 +536,9 @@ public class SalesOrderMainFragment extends AppCompatActivity {
 
             TextView salesStatus = findViewById(R.id.sales_order_status);
             salesStatus.setText(sales.getSalesStatus());
+
+            if (packCheck && invoiceCheck)
+                salesStatus.setText("Closed");
 
             if(sales.getSalesStatus().equals("Removed")) {
 
@@ -615,7 +621,7 @@ public class SalesOrderMainFragment extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
+            Toast.makeText(SalesOrderMainFragment.this, "Sales Order deleted.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -694,6 +700,7 @@ public class SalesOrderMainFragment extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Toast.makeText(SalesOrderMainFragment.this, "Package added.", Toast.LENGTH_LONG).show();
             finish();
             startActivity(getIntent());
         }

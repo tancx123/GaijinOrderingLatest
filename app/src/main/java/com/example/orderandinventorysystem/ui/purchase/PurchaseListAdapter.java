@@ -37,12 +37,10 @@ public class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapte
     public void onBindViewHolder(PurchaseListAdapter.ViewHolder holder, int position) {
         Purchase pur = mData.get(position);
         holder.myTextView.setText(pur.getVenName());
-        holder.order.setText(pur.getpOrder());
-        holder.ddate.setText(pur.getdDate());
-        holder.amount.setText(pur.getAmount());
-        holder.place.setText(pur.getDeliverType());
-
-
+        holder.id.setText(pur.getpID());
+        holder.pDate.setText(pur.getdDate());
+        holder.pStatus.setText(pur.getpStatus());
+        holder.pPrice.setText(String.format("MYR%.2f", pur.getpAmount()));
     }
 
     // total number of rows
@@ -53,16 +51,15 @@ public class PurchaseListAdapter extends RecyclerView.Adapter<PurchaseListAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView, order, place, ddate, amount;
+        TextView myTextView, pPrice, pDate, pStatus, id;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.vend_name_view);
-            order = itemView.findViewById(R.id.order_view);
-            ddate = itemView.findViewById(R.id.ddate_view);
-            amount = itemView.findViewById(R.id.amount_view);
-            place = itemView.findViewById(R.id.delivery_view);
-
+            id = itemView.findViewById(R.id.pID);
+            pDate = itemView.findViewById(R.id.pDate);
+            pPrice = itemView.findViewById(R.id.pPrice);
+            pStatus = itemView.findViewById(R.id.pStatus);
             itemView.setOnClickListener(this);
         }
 

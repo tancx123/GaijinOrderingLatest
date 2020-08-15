@@ -1,5 +1,6 @@
 package com.example.orderandinventorysystem.ui.invoice;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -39,6 +42,9 @@ public class add_new_invoice extends AppCompatActivity {
     Sales salesEdit;
     EditText dueDate;
     String invoiceLatestID, currentDate;
+    Calendar myCalendar = Calendar.getInstance();
+    Date today;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,53 @@ public class add_new_invoice extends AppCompatActivity {
         currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         text_invoice_date_input.setText(currentDate);
         dueDate = findViewById(R.id.text_due_date_input);
+
+        myCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        myCalendar.set(Calendar.MINUTE, 0);
+        myCalendar.set(Calendar.SECOND, 0);
+        myCalendar.set(Calendar.MILLISECOND, 0);
+
+        today = myCalendar.getTime();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR,year);
+                myCalendar.set(Calendar.MONTH,month);
+                myCalendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+                Date dateEnter = myCalendar.getTime();
+
+                if(dateEnter.before(today)){
+                    dueDate.setError("You cannot choose a past date");
+                    Toast toast = Toast.makeText(getApplicationContext(),"You cannot choose a past date, please reselect a valid date", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }
+                else{
+                    updateLabel();
+                }
+
+            }
+        };
+
+        dueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(add_new_invoice.this,date,myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
+
+    private void updateLabel() {
+        String myFormat = "dd-MM-YYYY";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dueDate.setText(sdf.format(myCalendar.getTime()));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -234,7 +286,7 @@ public class add_new_invoice extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
+            Toast.makeText(add_new_invoice.this, "Invoice added", Toast.LENGTH_LONG).show();
         }
     }
 

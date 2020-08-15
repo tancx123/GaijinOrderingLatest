@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -219,6 +220,9 @@ public class ItemMain extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {}
+        protected void onPostExecute(String s) {
+
+            Toast.makeText(ItemMain.this, "Item deleted.", Toast.LENGTH_LONG).show();
+        }
     }
 }

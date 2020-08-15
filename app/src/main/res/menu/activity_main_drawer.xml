@@ -36,10 +36,6 @@
             android:id="@+id/nav_purchase"
             android:icon="@drawable/purchase"
             android:title="Purchase Orders" />
-        <item
-            android:id="@+id/nav_bill"
-            android:icon="@drawable/payment"
-            android:title="Bills" />
 
     </group>
 </menu>

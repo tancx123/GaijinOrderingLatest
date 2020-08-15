@@ -1,16 +1,35 @@
 package com.example.orderandinventorysystem.Model;
 
-public class Purchase {
+import java.io.Serializable;
 
-    private String venName, deliverType, pOrder, dDate, eDate, amount;
+public class Purchase implements Serializable {
 
-    public Purchase(String venName, String deliverType, String pOrder, String dDate, String eDate, String amount) {
+    private String pID, venID, venName, dDate, pStatus;
+    private double pAmount;
+
+    public Purchase(String pID, String venID, String venName, String dDate, String pStatus, double pAmount) {
+        this.pID = pID;
+        this.venID = venID;
         this.venName = venName;
-        this.deliverType = deliverType;
-        this.pOrder = pOrder;
         this.dDate = dDate;
-        this.eDate = eDate;
-        this.amount = amount;
+        this.pStatus = pStatus;
+        this.pAmount = pAmount;
+    }
+
+    public String getpID() {
+        return pID;
+    }
+
+    public void setpID(String pID) {
+        this.pID = pID;
+    }
+
+    public String getVenID() {
+        return venID;
+    }
+
+    public void setVenID(String venID) {
+        this.venID = venID;
     }
 
     public String getVenName() {
@@ -21,40 +40,27 @@ public class Purchase {
         this.venName = venName;
     }
 
-    public String getDeliverType() {
-        return deliverType;
-    }
-
-    public void setDeliverType(String companyName) {
-        this.deliverType = deliverType;
-    }
-
-    public String getpOrder() {
-        return pOrder;
-    }
-
-    public void setpOrder(String pOrder) {
-        this.pOrder = pOrder;
-    }
-
     public String getdDate() {
         return dDate;
     }
 
-    public void setdDate(String phone) {
+    public void setdDate(String dDate) {
         this.dDate = dDate;
     }
 
-    public String geteDate() { return eDate; }
-
-    public void seteDate(String mobile) {
-        this.eDate = eDate;
+    public String getpStatus() {
+        return pStatus;
     }
 
-    public String getAmount() { return amount; }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setpStatus(String pStatus) {
+        this.pStatus = pStatus;
     }
 
+    public double getpAmount() {
+        return pAmount;
+    }
+
+    public void setpAmount(double pAmount) {
+        this.pAmount = pAmount;
+    }
 }

@@ -259,7 +259,10 @@ public class edit_item extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {}
+        protected void onPostExecute(String s) {
+
+            Toast.makeText(edit_item.this, "Item edited.", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

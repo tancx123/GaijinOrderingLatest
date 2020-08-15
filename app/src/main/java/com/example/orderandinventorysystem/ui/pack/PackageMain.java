@@ -1,5 +1,7 @@
 package com.example.orderandinventorysystem.ui.pack;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orderandinventorysystem.ConnectionPhpMyAdmin;
+import com.example.orderandinventorysystem.Model.Customer;
 import com.example.orderandinventorysystem.Model.Item;
 import com.example.orderandinventorysystem.Model.ItemOrder;
 import com.example.orderandinventorysystem.Model.Pack;
@@ -33,6 +36,7 @@ import com.example.orderandinventorysystem.Model.Shipment;
 import com.example.orderandinventorysystem.R;
 import com.example.orderandinventorysystem.ui.sales.ItemOrderListAdapter;
 import com.example.orderandinventorysystem.ui.sales.SalesOrderMainFragment;
+import com.example.orderandinventorysystem.ui.sales.add_sales_orders;
 import com.example.orderandinventorysystem.ui.sales.edit_sales_orders;
 
 import java.io.File;
@@ -45,6 +49,7 @@ import java.util.ArrayList;
 
 public class PackageMain extends AppCompatActivity {
 
+    Customer cust;
     Menu menu1;
     String latestShipID;
     int totalQuantity;
@@ -172,32 +177,32 @@ public class PackageMain extends AppCompatActivity {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         paint.setTextSize(20);
-        canvas.drawText("Abu Muhammad", 100,505, paint);
+        canvas.drawText(cust.getCompanyName(), 100,505, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("25, Jalan Pisang", 100,545, paint);
+        canvas.drawText(cust.getAddress(), 100,545, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("55302, Melaka Malaysia", 100,585, paint);
+        canvas.drawText(cust.getPostCode() + ", " + cust.getCity() + ", " + cust.getState(), 100,585, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Email : abu_0821@gmail.com", 100,625, paint);
+        canvas.drawText("Email : " + cust.getEmail(), 100,625, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Contact: 0123938472", 100,665, paint);
+        canvas.drawText("Phone: " + cust.getPhone(), 100,665, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
         paint.setTextSize(20);
-        canvas.drawText("Contact: 0123938472", 100,665, paint);
+        canvas.drawText("Mobile: " + cust.getMobile(), 100,705, paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -209,10 +214,6 @@ public class PackageMain extends AppCompatActivity {
         paint.setTextSize(20);
         canvas.drawText("Order Date : ", 800,625, paint);
 
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        paint.setTextSize(20);
-        canvas.drawText("Sales Person : ", 800,665, paint);
 
         paint.setTextAlign(Paint.Align.RIGHT);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -224,10 +225,6 @@ public class PackageMain extends AppCompatActivity {
         paint.setTextSize(20);
         canvas.drawText(pack.getPackDate(), 1050,625, paint);
 
-        paint.setTextAlign(Paint.Align.RIGHT);
-        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-        paint.setTextSize(20);
-        canvas.drawText("SpongeBob", 1050,665, paint);
 
         //Columns Name
         paint.setTextSize(20f);
@@ -243,10 +240,13 @@ public class PackageMain extends AppCompatActivity {
         paint.setStyle(Paint.Style.FILL);
         canvas.drawText("No", 40, 830, paint);
         canvas.drawText("Item Name", 100, 830, paint);
+        canvas.drawText("Quantity", 800, 830, paint);
+
         paint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText("Quantity", pageWidth-30, 830, paint);
+        canvas.drawText("Item Unit", pageWidth-30, 830, paint);
 
         canvas.drawLine(80, 790, 80, 860, paint);
+        canvas.drawLine(780, 790, 780, 860, paint);
         canvas.drawLine(1010, 790, 1010, 860, paint);
 
         //ItemOrder
@@ -257,8 +257,9 @@ public class PackageMain extends AppCompatActivity {
             paint.setTextAlign(Paint.Align.LEFT);
             canvas.drawText(ioList.get(i).getItemName(), 100, yAxis, paint);
             canvas.drawText(Integer.toString(num), 40, yAxis, paint);
+            canvas.drawText(Integer.toString(ioList.get(i).getQuantity()), 800, yAxis, paint);
             paint.setTextAlign(Paint.Align.RIGHT);
-            canvas.drawText(Integer.toString(ioList.get(i).getQuantity()), pageWidth-30, yAxis, paint);
+            canvas.drawText(itemList.get(i).getItemUnit(), pageWidth-30, yAxis, paint);
             canvas.drawLine(20, yAxis+15, pageWidth-20, yAxis+15, paint);
             num+=1;
         }
@@ -266,10 +267,13 @@ public class PackageMain extends AppCompatActivity {
         yAxis += 15;
         canvas.drawLine(20, 860, 20, yAxis, paint);
         canvas.drawLine(80, 860, 80, yAxis, paint);
+        canvas.drawLine(780, 860, 780, yAxis, paint);
         canvas.drawLine(1010, 860, 1010, yAxis, paint);
         canvas.drawLine(pageWidth-20, 860, pageWidth-20, yAxis, paint);
         canvas.drawLine(20, yAxis, pageWidth-20, yAxis, paint);
 
+
+        yAxis = pageHeight - 600;
 
         //Draw Line
         yAxis += 200;
@@ -311,7 +315,7 @@ public class PackageMain extends AppCompatActivity {
             Toast.makeText(this, "Delivery Order PDF has been saved into your device", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(),
+            Toast.makeText(this, "Please allow the storage permission for this application in your android settings",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -339,13 +343,38 @@ public class PackageMain extends AppCompatActivity {
             }
 
             case R.id.delivered: {
-                MarkDelivered markDelivered = new MarkDelivered();
-                markDelivered.execute("");
-                setResult(3);
-                finish();
-                Intent intent = new Intent(this, PackageMain.class);
-                intent.putExtra("Package", intentPackageID);
-                startActivityForResult(intent, 3);
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Once you mark as delivered, you cannot revert your action. Confirm?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                MarkDelivered markDelivered = new MarkDelivered();
+                                markDelivered.execute("");
+                                setResult(3);
+                                finish();
+                                Intent intent = new Intent(PackageMain.this, PackageMain.class);
+                                intent.putExtra("Package", intentPackageID);
+                                startActivityForResult(intent, 3);
+
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
                 return true;
             }
 
@@ -421,6 +450,27 @@ public class PackageMain extends AppCompatActivity {
                         pack = new Pack(rs.getString(1), rs.getString(2),
                                 rs.getString(3), rs.getString(4));
                     }
+
+                    String custID="";
+                    query = " SELECT * FROM SALES WHERE salesID ='" + pack.getSalesID() + "'";
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    if (rs.next()) {
+
+                        custID = rs.getString(2);
+                    }
+
+                    query = " SELECT * FROM CUSTOMER WHERE custID ='" + custID + "'";
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    if (rs.next()) {
+
+                        cust = new Customer(rs.getString(1), rs.getString(2), rs.getString(3),
+                                rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                                rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11),
+                                rs.getString(12),rs.getString(13), rs.getString(14));
+                    }
+
 
                     query = " SELECT * FROM ITEMORDER WHERE orderID ='" + pack.getSalesID() + "'";
                     stmt = con.createStatement();
@@ -604,7 +654,7 @@ public class PackageMain extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
+            Toast.makeText(PackageMain.this, "Package deleted.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -652,7 +702,7 @@ public class PackageMain extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
+            Toast.makeText(PackageMain.this, "Shipment deleted.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -696,7 +746,7 @@ public class PackageMain extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-
+            Toast.makeText(PackageMain.this, "Package has been delivered.", Toast.LENGTH_LONG).show();
         }
     }
 }

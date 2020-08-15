@@ -53,10 +53,5 @@
         android:label="Purchase Orders"
         tools:layout="@layout/fragment_item" />
 
-    <fragment
-        android:id="@+id/nav_bill"
-        android:name="com.example.orderandinventorysystem.ui.bill.BillFragment"
-        android:label="Bills"
-        tools:layout="@layout/fragment_item" />
 
 </navigation>

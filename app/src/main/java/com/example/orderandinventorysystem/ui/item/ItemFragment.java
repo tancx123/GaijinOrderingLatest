@@ -140,7 +140,7 @@ public class ItemFragment extends Fragment implements ItemListAdapter.ItemClickL
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (itemList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

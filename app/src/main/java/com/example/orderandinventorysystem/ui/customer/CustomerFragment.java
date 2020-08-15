@@ -119,12 +119,12 @@ public class CustomerFragment extends Fragment implements CustomerListAdapter.It
                     checkConnection = "No";
                 } else {
 
-                    String query = " SELECT * FROM CUSTOMER ";
+                    String query = " SELECT * FROM CUSTOMER WHERE STATUS='Available'";
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
 
                     while (rs.next()) {
-                        custList.add(new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10)));
+                        custList.add(new Customer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13), rs.getString(14)));
                         Log.d("Success", rs.getString(1));
                     }
 
@@ -145,7 +145,7 @@ public class CustomerFragment extends Fragment implements CustomerListAdapter.It
         protected void onPostExecute(String s) {
             recyclerView.setAdapter(adapter);
 
-            if (checkConnection.equals("No")) {
+            if (custList.size()==0) {
 
                 con.setVisibility(View.VISIBLE);
             }

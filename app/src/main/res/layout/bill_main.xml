@@ -40,7 +40,6 @@
                 android:orientation="vertical">
 
 
-
                 <TextView
                     android:id="@+id/p_Order"
                     android:layout_width="wrap_content"
@@ -78,120 +77,147 @@
                     app:layout_constraintStart_toEndOf="@+id/textView4"
                     app:layout_constraintTop_toBottomOf="@+id/p_Order" />
 
-
                 <TextView
-                    android:id="@+id/dDate"
+                    android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Amount Received"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <TextView
+                    android:id="@+id/sales_order_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="2-8-2020"
+                    android:fontFamily="sans-serif-black"
+                    android:text="MYR12.00"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                <TextView
+                    android:id="@+id/sales_order_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:text="30 Jul 2020"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textView7"
-                    app:layout_constraintTop_toBottomOf="@+id/vendor" />
+                    app:layout_constraintTop_toBottomOf="@+id/sales_order_price" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Date:"
+                    android:layout_marginTop="16dp"
+                    android:text="Payment Date:"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vendor" />
+                    app:layout_constraintTop_toBottomOf="@+id/sales_order_price" />
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Due Date:"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-                <TextView
-                    android:id="@+id/vmobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="10-10-2020"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView2"
-                    app:layout_constraintTop_toBottomOf="@+id/dDate" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TableLayout
-                android:id="@+id/f_table"
+                android:id="@+id/s_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/f_table"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
                 android:padding="15dp"
                 android:stretchColumns="1">
 
-                <!-- first row of the table layout-->
                 <TableRow
 
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp">
 
-                    <!-- first element of the row-->
-                    <TextView
 
+                    <TextView
+                        android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Purchase Details"
-                        android:textColor="#000"
-                        android:textSize="14sp" />
+                        android:text="Purchase Order"
+                        android:textColor="@android:color/black" />
 
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="Bill Amount"
+                        android:textAlignment="textEnd"
+                        android:textColor="@android:color/black" />
                 </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray" />
 
                 <TableRow
 
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+
+
+                    <TextView
+                        android:id="@+id/invoice_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="INV-000003"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/item_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="MYR 12.00"
+                        android:textAlignment="textEnd"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp"
-                    android:paddingTop="20dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp">
+                    android:paddingTop="10dp"
+                    android:paddingRight="5dp">
 
-                    <!-- first element of the row-->
+
                     <TextView
-
+                        android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tax"
-                        android:textColor="#000"
-                        android:textSize="14sp" />
+                        android:text="Purchase Order Date:" />
+
+                    <TextView
+                        android:id="@+id/invoice_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:text="30 Jul 2020"
+                        android:textColor="@android:color/black" />
+
 
                 </TableRow>
 
-                <TableRow
-
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp">
-
-                    <!-- first element of the row-->
-                    <TextView
-
-                        android:id="@+id/deposit_method"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Exclusive"
-                        android:textColor="#000"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </TableRow>
 
             </TableLayout>
 
