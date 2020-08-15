@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HomeOne"
+            android:name=".ui.staff.loginStaff"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,6 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeOne"/>
+        <activity android:name=".HomeTwo"/>
+        <activity android:name=".HomeThree"/>
         <activity android:name=".ui.purchase.edit_purchase_orders"/>
         <activity android:name=".ui.customer.CustomerMain"/>
         <activity android:name=".ui.customer.edit_customer"/>
@@ -42,7 +45,6 @@
         <activity android:name=".ui.sales.add_sales_line_item"/>
         <activity android:name=".ui.sales.add_sales_orders" />
         <activity android:name=".ui.bill.add_new_bill" />
-        <activity android:name=".ui.staff.loginStaff" />
         <activity android:name=".ui.staff.addStaff" />
         <activity android:name=".ui.staff.deleteStaff" />
         <activity android:name=".ui.staff.updateStaff" />

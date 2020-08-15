@@ -51,6 +51,7 @@ public class ItemFragment extends Fragment implements ItemListAdapter.ItemClickL
         super.onResume();
         // Check should we need to refresh the fragment
         if(shouldRefreshOnResume){
+            con.setVisibility(View.INVISIBLE);
             itemList = new ArrayList<>();
             ShowItemList showItemList = new ShowItemList();
             showItemList.execute("");

@@ -122,7 +122,7 @@ public class PurchaseMain extends AppCompatActivity{
             case R.id.paid:{
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-                builder1.setMessage("Once you mark as delivered, you cannot revert your action. Confirm?");
+                builder1.setMessage("Once you mark as paid, you cannot revert your action. Confirm?");
                 builder1.setCancelable(true);
 
                 builder1.setPositiveButton(

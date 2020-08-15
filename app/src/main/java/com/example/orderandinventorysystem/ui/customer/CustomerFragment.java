@@ -53,6 +53,7 @@ public class CustomerFragment extends Fragment implements CustomerListAdapter.It
         super.onResume();
         // Check should we need to refresh the fragment
         if(shouldRefreshOnResume){
+            con.setVisibility(View.INVISIBLE);
             custList = new ArrayList<>();
             ShowCustList showCustList = new ShowCustList();
             showCustList.execute("");

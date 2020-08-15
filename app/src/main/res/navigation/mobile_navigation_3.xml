@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_3"
+    app:startDestination="@+id/nav_items">
+
+    <fragment
+        android:id="@+id/nav_items"
+        android:name="com.example.orderandinventorysystem.ui.item.ItemFragment"
+        android:label="Items"
+        tools:layout="@layout/fragment_item" />
+
+    <fragment
+        android:id="@+id/nav_package"
+        android:name="com.example.orderandinventorysystem.ui.pack.PackageFragment"
+        android:label="Packages"
+        tools:layout="@layout/fragment_item" />
+
+</navigation>

@@ -59,6 +59,7 @@ public class sales_remove extends Fragment implements SalesListAdapter.ItemClick
         super.onResume();
         // Check should we need to refresh the fragment
         if(shouldRefreshOnResume){
+            con.setVisibility(View.INVISIBLE);
             salesList = new ArrayList<>();
             ShowSalesList showSalesList = new ShowSalesList();
             showSalesList.execute("");

@@ -38,6 +38,11 @@ public class PurchaseFragment extends Fragment implements PurchaseListAdapter.It
     TextView con;
     private boolean shouldRefreshOnResume = false;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_purchase, container, false);
@@ -68,6 +73,7 @@ public class PurchaseFragment extends Fragment implements PurchaseListAdapter.It
         super.onResume();
         // Check should we need to refresh the fragment
         if(shouldRefreshOnResume){
+            con.setVisibility(View.INVISIBLE);
             pList = new ArrayList<>();
             ShowPList showPList = new ShowPList();
             showPList.execute("");

@@ -60,6 +60,7 @@ public class InvoiceFragment extends Fragment implements InvoiceListAdapter.Item
         super.onResume();
         // Check should we need to refresh the fragment
         if(shouldRefreshOnResume){
+            con.setVisibility(View.INVISIBLE);
             invList = new ArrayList<>();
             ShowInvList showInvList = new ShowInvList();
             showInvList.execute("");

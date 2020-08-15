@@ -37,5 +37,9 @@
             android:icon="@drawable/purchase"
             android:title="Purchase Orders" />
 
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
     </group>
 </menu>

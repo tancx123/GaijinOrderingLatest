@@ -11,6 +11,8 @@ import com.example.orderandinventorysystem.R;
 
 public class viewStaff extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class viewStaff extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //recyclerView = root.findViewById(R.id.staff_list);
     }
 
     @Override

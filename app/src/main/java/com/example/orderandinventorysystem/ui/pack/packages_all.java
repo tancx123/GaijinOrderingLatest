@@ -64,7 +64,7 @@ public class packages_all extends Fragment implements PackageListAdapter.ItemCli
         super.onResume();
         // Check should we need to refresh the fragment
         if(shouldRefreshOnResume){
-
+            con.setVisibility(View.INVISIBLE);
             packList = new ArrayList<>();
 
             Log.d("HAHA", Integer.toString(packList.size()));
