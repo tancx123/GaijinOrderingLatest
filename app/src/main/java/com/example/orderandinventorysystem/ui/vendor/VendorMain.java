@@ -34,8 +34,8 @@ public class VendorMain extends AppCompatActivity{
         setContentView(R.layout.vendor_main);
         Toolbar toolbar = findViewById(R.id.toolbar2);
         Intent intent = getIntent();
-        String intentCustID = intent.getStringExtra("VendorID");
-        venID = intentCustID;
+        String intentVendorID = intent.getStringExtra("VendorID");
+        venID = intentVendorID;
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -75,9 +75,9 @@ public class VendorMain extends AppCompatActivity{
                 return true;
             }
             case R.id.edit_sales: {
-                Intent intent = new Intent(this, edit_customer.class);
+                Intent intent = new Intent(this, edit_vendor.class);
                 intent.putExtra("VendorID", venID);
-                startActivityForResult(intent, 17);
+                startActivityForResult(intent, 100);
 
                 return true;
             }

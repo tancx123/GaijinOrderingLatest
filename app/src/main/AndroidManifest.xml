@@ -42,6 +42,7 @@
         <activity android:name=".ui.vendor.VendorMain"/>
         <activity android:name=".ui.purchase.add_new_purchase"/>
         <activity android:name=".ui.vendor.add_new_vendor"/>
+        <activity android:name=".ui.vendor.edit_vendor"/>
         <activity android:name=".ui.sales.add_sales_line_item"/>
         <activity android:name=".ui.sales.add_sales_orders" />
         <activity android:name=".ui.bill.add_new_bill" />
